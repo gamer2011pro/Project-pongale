@@ -1,1 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Message Center</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background:
+        radial-gradient(circle at 20% 20%, #fbc2eb 0, transparent 30%),
+        radial-gradient(circle at 80% 80%, #a6c1ee 0, transparent 30%),
+        linear-gradient(135deg, #fdfbfb, #ebedee);
+
+      padding: 20px;
+    }
+
+    /* Main card */
+    .card {
+      width: 100%;
+      max-width: 410px;
+
+      background: rgba(255, 255, 255, 0.92);
+
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+
+      padding: 38px 34px;
+
+      text-align: center;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.12);
+
+      animation: cardIn 0.6s ease;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Logo */
+    .logo {
+      width: 170px;
+      height: 100px;
+
+      object-fit: contain;
+
+      display: block;
+
+      margin: 0 auto 18px;
+
+      animation: logoIn 0.7s ease;
+    }
+
+    @keyframes logoIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Heading */
+    h1 {
+      margin: 0;
+
+      font-size: 26px;
+
+      font-weight: 700;
+
+      color: #262626;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      margin-bottom: 28px;
+
+      color: #737373;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+    /* Form */
+    form {
+      text-align: left;
+    }
+
+    label {
+      display: block;
+
+      margin: 15px 0 7px;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #444;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+
+      border: 1px solid #d9d9d9;
+
+      border-radius: 11px;
+
+      background: #f8f8f8;
+
+      padding: 14px;
+
+      font-size: 14px;
+
+      outline: none;
+
+      transition:
+        border-color 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      background: #fff;
+
+      border-color: #7c3aed;
+
+      box-shadow:
+        0 0 0 3px rgba(124, 58, 237, 0.10);
+    }
+
+    textarea {
+      min-height: 135px;
+
+      resize: vertical;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+
+      margin-top: 20px;
+
+      padding: 14px;
+
+      border: none;
+
+      border-radius: 11px;
+
+      background:
+        linear-gradient(90deg, #7c3aed, #ec4899);
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 25px rgba(124, 58, 237, 0.25);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* Success */
+    .success {
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 12px;
+
+      border-radius: 10px;
+
+      background: #ecfdf5;
+
+      color: #047857;
+
+      font-size: 13px;
+
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 25px;
+
+      padding-top: 18px;
+
+      border-top: 1px solid #e5e5e5;
+
+      color: #8a8a8a;
+
+      font-size: 11px;
+
+      line-height: 1.6;
+    }
+
+    .secure {
+      display: inline-block;
+
+      margin-top: 5px;
+
+      font-weight: 600;
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+
+      body {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 30px 22px;
+
+        border-radius: 18px;
+      }
+
+      .logo {
+        width: 150px;
+        height: 90px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <main class="card">
+
+    <!--
+      LOGO
+
+      Put your PNG beside index.html
+      and name it:
+
+      logo.png
+    -->
+
+    <img
+      src="logo.png"
+      alt="Message Center Logo"
+      class="logo"
+    >
+
+
+    <h1>Message Center</h1>
+
+    <p class="subtitle">
+      Send a message directly to the owner.
+    </p>
+
+
+    <!--
+      EMAIL DELIVERY
+
+      Name + Message only.
+    -->
+
+    <form
+      action="https://formsubmit.co/sccartoons23@gmail.com"
+      method="POST"
+      onsubmit="showSuccess()"
+    >
+
+      <!-- Email subject -->
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Message Center Report"
+      >
+
+      <!-- Email format -->
+      <input
+        type="hidden"
+        name="_template"
+        value="table"
+      >
+
+      <!-- FormSubmit CAPTCHA -->
+      <input
+        type="hidden"
+        name="_captcha"
+        value="true"
+      >
+
+
+      <!-- NAME -->
+
+      <label for="name">
+        Your Name
+      </label>
+
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="Enter your name"
+        maxlength="100"
+        autocomplete="name"
+        required
+      >
+
+
+      <!-- MESSAGE -->
+
+      <label for="message">
+        Your Message
+      </label>
+
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Write your message..."
+        maxlength="2000"
+        required
+      ></textarea>
+
+
+      <!-- BUTTON -->
+
+      <button type="submit">
+        ✉️ Send Message
+      </button>
+
+    </form>
+
+
+    <!-- SUCCESS -->
+
+    <div
+      id="success"
+      class="success"
+    >
+      ✅ Your message has been submitted.
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+      Message Center Demo
+
+      <br>
+
+      <span class="secure">
+        🔒 Please don't enter passwords or private information.
+      </span>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    function showSuccess() {
+
+      document.getElementById("success").style.display = "block";
+
+    }
+
+  </script>
+
+</body>
+</html>
